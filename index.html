@@ -28,7 +28,8 @@
       width: 100%;
     }
 
-    .hidden-message {
+    .hidden-message,
+    .prize-message {
       font-size: 2rem;
       color: #222;
       font-weight: bold;
@@ -39,14 +40,17 @@
       transform: scale(0);
       opacity: 0;
       transition: all 0.7s ease-in-out;
+      margin-top: 20px;
     }
 
-    .hidden-message.show {
+    .hidden-message.show,
+    .prize-message.show {
       transform: scale(1);
       opacity: 1;
     }
 
-    .reveal-button {
+    .reveal-button,
+    .prize-button {
       font-size: 1.2rem;
       padding: 15px 30px;
       background-color: #ffd700;
@@ -56,20 +60,32 @@
       cursor: pointer;
       font-weight: bold;
       transition: background 0.3s ease;
+      margin-top: 20px;
     }
 
-    .reveal-button:hover {
+    .reveal-button:hover,
+    .prize-button:hover {
       background-color: #ffc400;
+    }
+
+    .prize-button {
+      display: none;
+    }
+
+    .prize-button.show {
+      display: inline-block;
     }
 
     /* Mobile tweaks */
     @media (max-width: 480px) {
-      .hidden-message {
+      .hidden-message,
+      .prize-message {
         font-size: 1.5rem;
         padding: 16px;
       }
 
-      .reveal-button {
+      .reveal-button,
+      .prize-button {
         font-size: 1rem;
         padding: 12px 24px;
       }
@@ -80,14 +96,30 @@
 
   <div class="wrapper">
     <button class="reveal-button" onclick="showMessage()">Tap to Reveal Surprise 🎉</button>
+    
     <div class="hidden-message" id="congratsMessage">
       CONGRATULATIONS LOVE FOR SURVIVING YOUR FIRST DAY AS VET ASSISTANT 💖🐾
+      <br>
+      <button class="prize-button" id="prizeButton" onclick="showPrize()">Click here to claim your prize 🎁</button>
+    </div>
+    
+    <div class="prize-message" id="prizeMessage">
+      1pc Spicy Chicken Jollibee 🍗🔥
     </div>
   </div>
 
   <script>
     function showMessage() {
-      document.getElementById('congratsMessage').classList.add('show');
+      const msg = document.getElementById('congratsMessage');
+      const btn = document.getElementById('prizeButton');
+      msg.classList.add('show');
+      setTimeout(() => {
+        btn.classList.add('show');
+      }, 700); // Match transition timing
+    }
+
+    function showPrize() {
+      document.getElementById('prizeMessage').classList.add('show');
     }
   </script>
 
